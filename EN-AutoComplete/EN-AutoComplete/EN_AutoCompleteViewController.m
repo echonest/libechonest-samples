@@ -56,6 +56,15 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *artist = [suggestResults objectAtIndex:indexPath.row];
+    [tableView deselectRowAtIndexPath:indexPath.row animated:YES];
+    // create an artist view
+    
+}
+
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

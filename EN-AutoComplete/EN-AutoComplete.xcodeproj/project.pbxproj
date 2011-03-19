@@ -12,6 +12,8 @@
 		C83C6EB31333C95A0044DC52 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C6EB01333C95A0044DC52 /* MobileCoreServices.framework */; };
 		C83C6EB51333C9790044DC52 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C6EB41333C9790044DC52 /* SystemConfiguration.framework */; };
 		C83C6EB61333C9EE0044DC52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C6EAE1333C95A0044DC52 /* Foundation.framework */; };
+		C87C47C6133538A200BCC1EB /* ENArtistAudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = C87C47C4133538A100BCC1EB /* ENArtistAudioView.m */; };
+		C87C47C7133538A200BCC1EB /* ENArtistAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C87C47C5133538A200BCC1EB /* ENArtistAudioView.xib */; };
 		C8E2A3A7133510C10046564B /* TSUIAssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E2A3A6133510C10046564B /* TSUIAssertionHandler.m */; };
 		C8F01AA11332C2880033C64E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F01AA01332C2880033C64E /* UIKit.framework */; };
 		C8F01AA51332C2880033C64E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F01AA41332C2880033C64E /* CoreGraphics.framework */; };
@@ -30,6 +32,9 @@
 		C83C6EAF1333C95A0044DC52 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		C83C6EB01333C95A0044DC52 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C83C6EB41333C9790044DC52 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C87C47C3133538A100BCC1EB /* ENArtistAudioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENArtistAudioView.h; sourceTree = "<group>"; };
+		C87C47C4133538A100BCC1EB /* ENArtistAudioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENArtistAudioView.m; sourceTree = "<group>"; };
+		C87C47C5133538A200BCC1EB /* ENArtistAudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ENArtistAudioView.xib; path = "EN-AutoComplete/ENArtistAudioView.xib"; sourceTree = "<group>"; };
 		C8E2A3A5133510C10046564B /* TSUIAssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUIAssertionHandler.h; sourceTree = "<group>"; };
 		C8E2A3A6133510C10046564B /* TSUIAssertionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUIAssertionHandler.m; sourceTree = "<group>"; };
 		C8F01A9C1332C2880033C64E /* EN-AutoComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EN-AutoComplete.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,11 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C87C47C9133538B500BCC1EB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C8F01AB81332C2890033C64E /* EN_AutoCompleteViewController.xib */,
+				C87C47C5133538A200BCC1EB /* ENArtistAudioView.xib */,
+				C8F01AB21332C2880033C64E /* MainWindow.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		C8F01A911332C2880033C64E = {
 			isa = PBXGroup;
 			children = (
 				C8F01AC01332C2AC0033C64E /* liblibechonest.a */,
 				C8F01AA61332C2880033C64E /* EN-AutoComplete */,
+				C87C47C9133538B500BCC1EB /* Resources */,
 				C8F01A9F1332C2880033C64E /* Frameworks */,
 				C8F01A9D1332C2880033C64E /* Products */,
 			);
@@ -104,10 +120,10 @@
 			children = (
 				C8F01AAF1332C2880033C64E /* EN_AutoCompleteAppDelegate.h */,
 				C8F01AB01332C2880033C64E /* EN_AutoCompleteAppDelegate.m */,
-				C8F01AB21332C2880033C64E /* MainWindow.xib */,
 				C8F01AB51332C2880033C64E /* EN_AutoCompleteViewController.h */,
 				C8F01AB61332C2880033C64E /* EN_AutoCompleteViewController.m */,
-				C8F01AB81332C2890033C64E /* EN_AutoCompleteViewController.xib */,
+				C87C47C3133538A100BCC1EB /* ENArtistAudioView.h */,
+				C87C47C4133538A100BCC1EB /* ENArtistAudioView.m */,
 				C8F01AA71332C2880033C64E /* Supporting Files */,
 			);
 			path = "EN-AutoComplete";
@@ -176,6 +192,7 @@
 				C8F01AAB1332C2880033C64E /* InfoPlist.strings in Resources */,
 				C8F01AB41332C2880033C64E /* MainWindow.xib in Resources */,
 				C8F01ABA1332C2890033C64E /* EN_AutoCompleteViewController.xib in Resources */,
+				C87C47C7133538A200BCC1EB /* ENArtistAudioView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +207,7 @@
 				C8F01AB11332C2880033C64E /* EN_AutoCompleteAppDelegate.m in Sources */,
 				C8F01AB71332C2880033C64E /* EN_AutoCompleteViewController.m in Sources */,
 				C8E2A3A7133510C10046564B /* TSUIAssertionHandler.m in Sources */,
+				C87C47C6133538A200BCC1EB /* ENArtistAudioView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +228,7 @@
 				C8F01AB31332C2880033C64E /* en */,
 			);
 			name = MainWindow.xib;
+			path = "EN-AutoComplete";
 			sourceTree = "<group>";
 		};
 		C8F01AB81332C2890033C64E /* EN_AutoCompleteViewController.xib */ = {
@@ -218,6 +237,7 @@
 				C8F01AB91332C2890033C64E /* en */,
 			);
 			name = EN_AutoCompleteViewController.xib;
+			path = "EN-AutoComplete";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -11,6 +11,11 @@
 #import "EN_AutoCompleteViewController.h"
 
 #import "ENAPI.h"
+#import "TSUIAssertionHandler.h"
+
+void TSACFunctionThatAssertsOut() {
+    NSCAssert(false, @"This C function totally bugged out: %x", 0xdeadbeef);
+}
 
 static NSString *TEST_API_KEY = @"2J12S2GOSDBV2KC6V";
 
@@ -23,12 +28,19 @@ static NSString *TEST_API_KEY = @"2J12S2GOSDBV2KC6V";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    TSInstallUIAssertionHandler();
+    
     // Override point for customization after application launch.
      
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
     [ENAPI initWithApiKey:TEST_API_KEY];
+    NSAssert(false, @"This Should Be a UIAlert: %d, %f", 325, 3.14);
+    
+    TSACFunctionThatAssertsOut();
+    
     return YES;
 }
 

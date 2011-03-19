@@ -60,9 +60,15 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (nil != suggestRequest && !suggestRequest.complete) {
-        //[suggestRequest cancel];
+        [suggestRequest cancel];
+        suggestRequest = nil;
     }
-suggestRequest = [ENAPIRequest artistSuggestWithString:searchText];
+    if ([searchText isEqualToString:@""]) {
+        [suggestResults removeAllObjects];
+        [self.tableView reloadData];
+        return;
+    }
+    suggestRequest = [ENAPIRequest artistSuggestWithString:searchText];
     suggestRequest.delegate = self;
     [suggestRequest startAsynchronous];
 }

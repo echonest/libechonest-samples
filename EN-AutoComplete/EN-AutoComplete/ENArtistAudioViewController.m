@@ -3,13 +3,14 @@
 //  EN-AutoComplete
 //
 //  Created by Art Gillespie on 3/19/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 tapsquare, llc. All rights reserved.
 //
 
-#import "ENArtistAudioView.h"
+#import "ENArtistAudioViewController.h"
 
 
-@implementation ENArtistAudioView
+@implementation ENArtistAudioViewController
+@synthesize artist;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,23 +39,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    audioResults = [[NSMutableArray alloc] initWithCapacity:10];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = [self.artist valueForKey:@"name"];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [audioResults release];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // start the request for the artist's audio
+    ENParamDictionary *params = [ENParamDictionary paramDictionary];
+    ENAPIRequest *request = [ENAPIRequest artistAudioWithName:[self.artist valueForKey:@"id"] params:params];
+    request.delegate = self;
+    [request startAsynchronous];
     [super viewWillAppear:animated];
 }
 
@@ -83,30 +91,56 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return audioResults.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ArtistAudioCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell...
+    NSDictionary *audio = [audioResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = [audio valueForKey:@"title"];
+    cell.detailTextLabel.text = [audio valueForKey:@"release"];
     
     return cell;
+}
+
+#pragma mark - ASIHTTPRequestDelegate
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSDictionary *results = [(ENAPIRequest*)request JSONValue];
+    NSDictionary *response = [results valueForKey:@"response"];
+    [self.tableView beginUpdates];
+        // copy the received results and animate the change in the table
+        int oldCount = audioResults.count;
+        [audioResults removeAllObjects];
+        // build a delete array
+        NSMutableArray *deletePaths = [[NSMutableArray alloc] initWithCapacity:oldCount];
+        for (int ii = 0; ii < oldCount; ++ii) {
+            [deletePaths addObject:[NSIndexPath indexPathForRow:ii inSection:0]];
+        }
+        [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationTop];
+        [deletePaths release];
+        [audioResults addObjectsFromArray:[response valueForKey:@"audio"]];
+        // build an insert array
+        NSMutableArray *insertPaths = [[NSMutableArray alloc] initWithCapacity:audioResults.count];
+        for (int ii = 0; ii < audioResults.count; ++ii) {
+            [insertPaths addObject:[NSIndexPath indexPathForRow:ii inSection:0]];
+        }
+        [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationTop];
+        [insertPaths release];
+    [self.tableView endUpdates];
 }
 
 /*

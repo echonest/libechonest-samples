@@ -8,6 +8,7 @@
 #import "EN_AutoCompleteViewController.h"
 #import "ENAPI.h"
 #import "ENAPIRequest.h"
+#import "ENArtistAudioViewController.h"
 
 @implementation EN_AutoCompleteViewController
 
@@ -59,15 +60,17 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *artist = [suggestResults objectAtIndex:indexPath.row];
-    [tableView deselectRowAtIndexPath:indexPath.row animated:YES];
     // create an artist view
-    
+    ENArtistAudioViewController *artistAudioController = [[ENArtistAudioViewController alloc] initWithNibName:@"ENArtistAudioViewController" bundle:nil];
+    artistAudioController.artist = [suggestResults objectAtIndex:indexPath.row];;
+    [self.navigationController pushViewController:artistAudioController animated:YES];
+    [artistAudioController release];
 }
 
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
     if (nil != suggestRequest && !suggestRequest.complete) {
         [suggestRequest cancel];
         suggestRequest = nil;
@@ -77,7 +80,8 @@
         [self.tableView reloadData];
         return;
     }
-    suggestRequest = [ENAPIRequest artistSuggestWithString:searchText];
+    ENParamDictionary *params = [ENParamDictionary paramDictionary];
+    suggestRequest = [ENAPIRequest artistSuggestWithString:searchText params:params];
     suggestRequest.delegate = self;
     [suggestRequest startAsynchronous];
 }
@@ -89,7 +93,9 @@
     NSDictionary *response = [[enRequest JSONValue] valueForKey:@"response"];
     NSArray *artists = [response valueForKey:@"artists"];
     [suggestResults removeAllObjects];
-    [suggestResults addObjectsFromArray:artists];
+    for (int ii=0; ii<artists.count; ++ii) {
+        [suggestResults addObject:[artists objectAtIndex:ii]];        
+    }
     [self.tableView reloadData];
     suggestRequest = nil;
 }

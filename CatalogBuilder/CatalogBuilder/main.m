@@ -1,9 +1,9 @@
 //
 //  main.m
-//  EN-AutoComplete
+//  CatalogBuilder
 //
-//  Created by Art Gillespie on 3/17/11. art@tapsquare.com
-//  Copyright 2011 tapsquare, llc All rights reserved.
+//  Created by Art Gillespie on 3/23/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -12,16 +12,14 @@ void TSInstallUIAssertionHandler() {
     // NSAssertionHandlerKey
     NSAssertionHandler *handler = [[[NSThread currentThread] threadDictionary] valueForKey:NSAssertionHandlerKey];
     if (nil == handler) {
-        [[[NSThread currentThread] threadDictionary] setObject:[[TSUIAssertionHandler alloc] init] forKey:NSAssertionHandlerKey];
+        [[[NSThread currentThread] threadDictionary] setObject:[[[TSUIAssertionHandler alloc] init] autorelease] forKey:NSAssertionHandlerKey];
     } else {
         
     }
 }
 
 void TSUinstallUIAssertionHandler() {
-    NSAssertionHandler *handler = [[[NSThread currentThread] threadDictionary] valueForKey:NSAssertionHandlerKey];
     [[[NSThread currentThread] threadDictionary] removeObjectForKey:NSAssertionHandlerKey];
-    [handler release];
 }
 
 @implementation TSUIAssertionHandler
@@ -32,11 +30,11 @@ void TSUinstallUIAssertionHandler() {
     // grab just the file name, we don't need the whole flippin' path
     NSString *justFileName = [fileName lastPathComponent];
     NSString *fullMsg = [NSString stringWithFormat:@"%@:%d:%@\n\n%@", justFileName, line, functionName, desc];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Assert Failed", @"AssertHandler Alert") 
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Assert Failed", @"AssertHandler Alert") 
                                                     message:fullMsg
                                                    delegate:self 
                                           cancelButtonTitle:NSLocalizedString(@"Ok", @"Ok") 
-                                          otherButtonTitles:nil];
+                                          otherButtonTitles:nil] autorelease];
     [alert show];
 }
 

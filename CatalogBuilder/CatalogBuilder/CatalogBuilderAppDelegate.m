@@ -1,25 +1,16 @@
 //
-//  EN_AutoCompleteAppDelegate.m
-//  EN-AutoComplete
+//  CatalogBuilderAppDelegate.m
+//  CatalogBuilder
 //
-//  Created by Art Gillespie on 3/17/11.
-//  Copyright 2011 tapsquare, llc. All rights reserved.
+//  Created by Art Gillespie on 3/23/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "EN_AutoCompleteAppDelegate.h"
+#import "CatalogBuilderAppDelegate.h"
 
-#import "EN_AutoCompleteViewController.h"
+#import "CatalogBuilderViewController.h"
 
-#import "ENAPI.h"
-#import "TSUIAssertionHandler.h"
-
-void TSACFunctionThatAssertsOut() {
-    NSCAssert1(false, @"This C function totally bugged out: %x", 0xdeadbeef);
-}
-
-static NSString *TEST_API_KEY = @"2J12S2GOSDBV2KC6V";
-
-@implementation EN_AutoCompleteAppDelegate
+@implementation CatalogBuilderAppDelegate
 
 
 @synthesize window=_window;
@@ -28,16 +19,10 @@ static NSString *TEST_API_KEY = @"2J12S2GOSDBV2KC6V";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //CUSTOM ASSERTION HANDLER EXAMPLE
-    TSInstallUIAssertionHandler();
-    
     // Override point for customization after application launch.
      
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
-    [ENAPI initWithApiKey:TEST_API_KEY];
-        
     return YES;
 }
 

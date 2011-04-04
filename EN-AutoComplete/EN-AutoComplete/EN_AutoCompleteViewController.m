@@ -73,6 +73,7 @@
     
     if (nil != suggestRequest && !suggestRequest.complete) {
         [suggestRequest cancel];
+        [suggestRequest release];
         suggestRequest = nil;
     }
     if ([searchText isEqualToString:@""]) {
@@ -80,17 +81,16 @@
         [self.tableView reloadData];
         return;
     }
-    ENParamDictionary *params = [ENParamDictionary paramDictionary];
-    suggestRequest = [ENAPIRequest artistSuggestWithString:searchText params:params];
+    suggestRequest = [[ENAPIRequest alloc] initWithEndpoint:@"artist/suggest"];
+    [suggestRequest setValue:searchText forParameter:@"name"];
     suggestRequest.delegate = self;
     [suggestRequest startAsynchronous];
 }
 
-#pragma mark - ASIHTTPRequestDelegate
+#pragma mark - ENAPIRequestDelegate
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    ENAPIRequest *enRequest = (ENAPIRequest *)request;
-    NSDictionary *response = [[enRequest JSONValue] valueForKey:@"response"];
+- (void)requestFinished:(ENAPIRequest *)request {
+    NSDictionary *response = [request.response valueForKey:@"response"];
     NSArray *artists = [response valueForKey:@"artists"];
     [suggestResults removeAllObjects];
     for (int ii=0; ii<artists.count; ++ii) {
@@ -98,6 +98,11 @@
     }
     [self.tableView reloadData];
     suggestRequest = nil;
+    [request release];
+}
+
+- (void)requestFailed:(ENAPIRequest *)request {
+    
 }
 
 - (void)viewDidUnload

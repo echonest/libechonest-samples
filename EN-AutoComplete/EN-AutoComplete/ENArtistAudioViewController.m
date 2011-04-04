@@ -23,6 +23,7 @@
 
 - (void)dealloc
 {
+    [audioResults release];
     [super dealloc];
 }
 
@@ -59,8 +60,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // start the request for the artist's audio
-    ENParamDictionary *params = [ENParamDictionary paramDictionary];
-    ENAPIRequest *request = [ENAPIRequest artistAudioWithName:[self.artist valueForKey:@"id"] params:params];
+    ENAPIRequest *request = [[ENAPIRequest alloc] initWithEndpoint:@"artist/audio"];
+    [request setValue:[self.artist valueForKey:@"id"] forParameter:@"name"];
     request.delegate = self;
     [request startAsynchronous];
     [super viewWillAppear:animated];
@@ -116,11 +117,10 @@
     return cell;
 }
 
-#pragma mark - ASIHTTPRequestDelegate
+#pragma mark - ENAPIRequestDelegate
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSDictionary *results = [(ENAPIRequest*)request JSONValue];
-    NSDictionary *response = [results valueForKey:@"response"];
+- (void)requestFinished:(ENAPIRequest *)request {
+    NSDictionary *response = [request.response valueForKey:@"response"];
     [self.tableView beginUpdates];
         // copy the received results and animate the change in the table
         int oldCount = audioResults.count;
@@ -141,6 +141,11 @@
         [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationTop];
         [insertPaths release];
     [self.tableView endUpdates];
+    [request release];
+}
+
+- (void)requestFailed:(ENAPIRequest *)request {
+    [request release];
 }
 
 /*

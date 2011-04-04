@@ -14,6 +14,7 @@
 		C83C6EB61333C9EE0044DC52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83C6EAE1333C95A0044DC52 /* Foundation.framework */; };
 		C87C47C6133538A200BCC1EB /* ENArtistAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C87C47C4133538A100BCC1EB /* ENArtistAudioViewController.m */; };
 		C87C47C7133538A200BCC1EB /* ENArtistAudioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C87C47C5133538A200BCC1EB /* ENArtistAudioViewController.xib */; };
+		C8BF6AAE1342AC0400C77693 /* libechonest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8BF6AAD1342AC0400C77693 /* libechonest.a */; };
 		C8E2A3A7133510C10046564B /* TSUIAssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E2A3A6133510C10046564B /* TSUIAssertionHandler.m */; };
 		C8F01AA11332C2880033C64E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F01AA01332C2880033C64E /* UIKit.framework */; };
 		C8F01AA51332C2880033C64E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F01AA41332C2880033C64E /* CoreGraphics.framework */; };
@@ -23,8 +24,24 @@
 		C8F01AB41332C2880033C64E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8F01AB21332C2880033C64E /* MainWindow.xib */; };
 		C8F01AB71332C2880033C64E /* EN_AutoCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F01AB61332C2880033C64E /* EN_AutoCompleteViewController.m */; };
 		C8F01ABA1332C2890033C64E /* EN_AutoCompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8F01AB81332C2890033C64E /* EN_AutoCompleteViewController.xib */; };
-		C8F01AC11332C2AC0033C64E /* libechonest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8F01AC01332C2AC0033C64E /* libechonest.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C8BF6AA91342ABF600C77693 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8BF6AA41342ABF600C77693 /* libechonest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C81C29541326DDBD0048DD51;
+			remoteInfo = echonest;
+		};
+		C8BF6AAB1342ABF600C77693 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8BF6AA41342ABF600C77693 /* libechonest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C869523B1329D783005F6CF5;
+			remoteInfo = tests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C83C6EAD1333C95A0044DC52 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -35,6 +52,8 @@
 		C87C47C3133538A100BCC1EB /* ENArtistAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENArtistAudioViewController.h; sourceTree = "<group>"; };
 		C87C47C4133538A100BCC1EB /* ENArtistAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENArtistAudioViewController.m; sourceTree = "<group>"; };
 		C87C47C5133538A200BCC1EB /* ENArtistAudioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ENArtistAudioViewController.xib; path = "EN-AutoComplete/ENArtistAudioViewController.xib"; sourceTree = "<group>"; };
+		C8BF6AA41342ABF600C77693 /* libechonest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libechonest.xcodeproj; path = ../../libechonest/libechonest.xcodeproj; sourceTree = "<group>"; };
+		C8BF6AAD1342AC0400C77693 /* libechonest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libechonest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8E2A3A5133510C10046564B /* TSUIAssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSUIAssertionHandler.h; sourceTree = "<group>"; };
 		C8E2A3A6133510C10046564B /* TSUIAssertionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSUIAssertionHandler.m; sourceTree = "<group>"; };
 		C8F01A9C1332C2880033C64E /* EN-AutoComplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EN-AutoComplete.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,7 +69,6 @@
 		C8F01AB51332C2880033C64E /* EN_AutoCompleteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EN_AutoCompleteViewController.h; sourceTree = "<group>"; };
 		C8F01AB61332C2880033C64E /* EN_AutoCompleteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EN_AutoCompleteViewController.m; sourceTree = "<group>"; };
 		C8F01AB91332C2890033C64E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EN_AutoCompleteViewController.xib; sourceTree = "<group>"; };
-		C8F01AC01332C2AC0033C64E /* libechonest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libechonest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +76,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8BF6AAE1342AC0400C77693 /* libechonest.a in Frameworks */,
 				C83C6EB51333C9790044DC52 /* SystemConfiguration.framework in Frameworks */,
 				C83C6EB11333C95A0044DC52 /* CFNetwork.framework in Frameworks */,
 				C83C6EB21333C95A0044DC52 /* libz.dylib in Frameworks */,
 				C83C6EB31333C95A0044DC52 /* MobileCoreServices.framework in Frameworks */,
-				C8F01AC11332C2AC0033C64E /* libechonest.a in Frameworks */,
 				C8F01AA11332C2880033C64E /* UIKit.framework in Frameworks */,
 				C83C6EB61333C9EE0044DC52 /* Foundation.framework in Frameworks */,
 				C8F01AA51332C2880033C64E /* CoreGraphics.framework in Frameworks */,
@@ -82,10 +100,20 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		C8BF6AA51342ABF600C77693 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8BF6AAA1342ABF600C77693 /* libechonest.a */,
+				C8BF6AAC1342ABF600C77693 /* tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C8F01A911332C2880033C64E = {
 			isa = PBXGroup;
 			children = (
-				C8F01AC01332C2AC0033C64E /* libechonest.a */,
+				C8BF6AAD1342AC0400C77693 /* libechonest.a */,
+				C8BF6AA41342ABF600C77693 /* libechonest.xcodeproj */,
 				C8F01AA61332C2880033C64E /* EN-AutoComplete */,
 				C87C47C9133538B500BCC1EB /* Resources */,
 				C8F01A9F1332C2880033C64E /* Frameworks */,
@@ -177,12 +205,35 @@
 			mainGroup = C8F01A911332C2880033C64E;
 			productRefGroup = C8F01A9D1332C2880033C64E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C8BF6AA51342ABF600C77693 /* Products */;
+					ProjectRef = C8BF6AA41342ABF600C77693 /* libechonest.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C8F01A9B1332C2880033C64E /* EN-AutoComplete */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C8BF6AAA1342ABF600C77693 /* libechonest.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libechonest.a;
+			remoteRef = C8BF6AA91342ABF600C77693 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C8BF6AAC1342ABF600C77693 /* tests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = tests.octest;
+			remoteRef = C8BF6AAB1342ABF600C77693 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C8F01A9A1332C2880033C64E /* Resources */ = {

@@ -6,10 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ENAPIRequest.h"
 
-@class ENAPIRequest;
-
-@interface EN_AutoCompleteViewController : UITableViewController <UISearchBarDelegate> {
+@interface EN_AutoCompleteViewController : UITableViewController <UISearchBarDelegate, ENAPIRequestDelegate> {
     @private
     NSMutableArray *suggestResults;
     ENAPIRequest *suggestRequest;

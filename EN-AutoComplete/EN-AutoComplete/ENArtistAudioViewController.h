@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ENAPIRequest.h"
 
-@interface ENArtistAudioViewController : UITableViewController <ASIHTTPRequestDelegate> {
+@interface ENArtistAudioViewController : UITableViewController <ENAPIRequestDelegate> {
     NSMutableArray *audioResults;
 }
 

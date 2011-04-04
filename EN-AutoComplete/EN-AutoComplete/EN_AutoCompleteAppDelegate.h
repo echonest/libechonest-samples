@@ -2,8 +2,7 @@
 //  EN_AutoCompleteAppDelegate.h
 //  EN-AutoComplete
 //
-//  Created by Art Gillespie on 3/17/11.
-//  Copyright 2011 tapsquare, llc. All rights reserved.
+//  Created by Art Gillespie on 3/17/11. art@tapsquare.com
 //
 
 #import <UIKit/UIKit.h>

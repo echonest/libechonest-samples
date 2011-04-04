@@ -1,8 +1,7 @@
 //
 //  TSUIAssertionHandler.h
-//  EN-AutoComplete
 //
-//  Created by Art Gillespie on 3/19/11.
+//  Created by Art Gillespie on 3/19/11. art@tapsquare.com
 //  Copyright 2011 tapsquare, llc. All rights reserved.
 //
 

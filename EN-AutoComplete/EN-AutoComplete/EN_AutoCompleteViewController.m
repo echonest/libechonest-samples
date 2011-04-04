@@ -20,15 +20,8 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
-
-#pragma mark - View lifecycle
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -38,7 +31,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // return the current number of results
+    // return the current number of `artist/suggest` results
     return suggestResults.count;
 }
 
@@ -52,6 +45,7 @@
     if (nil == cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
     }
+	// Set up the cell with the artist's name.
     NSDictionary *artist = [suggestResults objectAtIndex:indexPath.row];
     cell.textLabel.text = [artist valueForKey:@"name"];
     return cell;
@@ -60,7 +54,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // create an artist view
+    // the user has tapped on an artist: create an artist view
     ENArtistAudioViewController *artistAudioController = [[ENArtistAudioViewController alloc] initWithNibName:@"ENArtistAudioViewController" bundle:nil];
     artistAudioController.artist = [suggestResults objectAtIndex:indexPath.row];;
     [self.navigationController pushViewController:artistAudioController animated:YES];
@@ -70,17 +64,24 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
+    // the user has changed the text in the search bar
     if (nil != suggestRequest && !suggestRequest.complete) {
+		// we only want to have one request active at any time, so 
+		// cancel the existing request if it hasn't completede. 
+		// Note that we're threadsafe here, because everything's
+		// happening on the main thread's runloop.
         [suggestRequest cancel];
         [suggestRequest release];
         suggestRequest = nil;
     }
     if ([searchText isEqualToString:@""]) {
+		// if the searchBar has no text, we don't need to ask
+		// the server for suggestions, just empty the results array.
         [suggestResults removeAllObjects];
         [self.tableView reloadData];
         return;
     }
+	// ask the Echo Nest server for suggestions
     suggestRequest = [[ENAPIRequest alloc] initWithEndpoint:@"artist/suggest"];
     [suggestRequest setValue:searchText forParameter:@"name"];
     suggestRequest.delegate = self;
@@ -90,8 +91,22 @@
 #pragma mark - ENAPIRequestDelegate
 
 - (void)requestFinished:(ENAPIRequest *)request {
-    NSDictionary *response = [request.response valueForKey:@"response"];
-    NSArray *artists = [response valueForKey:@"artists"];
+	// The Echo Nest server has repsonded. 
+	
+	// There are handy accessors for the Echo Nest status
+	// code and status message
+	if (0 != request.echonestStatusCode) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Echo Nest Error", @"")
+														message:request.echonestStatusMessage
+													   delegate:nil
+											  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+											  otherButtonTitles:nil];
+		[alert show];
+		[alert release];
+		[request release];
+		return;
+	}
+    NSArray *artists = [request.response valueForKeyPath:@"response.artists"];
     [suggestResults removeAllObjects];
     for (int ii=0; ii<artists.count; ++ii) {
         [suggestResults addObject:[artists objectAtIndex:ii]];        
@@ -102,19 +117,26 @@
 }
 
 - (void)requestFailed:(ENAPIRequest *)request {
-    
+    // The request or connection failed at a low level, use
+	// the request's error property to get information on the
+	// failure
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", @"")
+													message:[request.error localizedDescription]
+												   delegate:nil
+										  cancelButtonTitle:NSLocalizedString(@"OK", @"")
+										  otherButtonTitles:nil];
+	[alert show];
+	[alert release];
+	[request release];	
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 

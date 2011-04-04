@@ -2,14 +2,14 @@
 //  ENArtistAudioView.h
 //  EN-AutoComplete
 //
-//  Created by Art Gillespie on 3/19/11.
-//  Copyright 2011 tapsquare, llc. All rights reserved.
+//  Created by Art Gillespie on 3/19/11. art@tapsquare.com
 //
 
 #import <UIKit/UIKit.h>
 #import "ENAPIRequest.h"
 
 @interface ENArtistAudioViewController : UITableViewController <ENAPIRequestDelegate> {
+	// stores the results of the artist/audio Echo Nest API calls
     NSMutableArray *audioResults;
 }
 

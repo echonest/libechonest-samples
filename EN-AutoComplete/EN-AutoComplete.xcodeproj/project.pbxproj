@@ -32,7 +32,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = C8BF6AA41342ABF600C77693 /* libechonest.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = C81C29531326DDBD0048DD51 /* echonest */;
+			remoteGlobalIDString = C81C29531326DDBD0048DD51;
 			remoteInfo = echonest;
 		};
 		C8BF6AA91342ABF600C77693 /* PBXContainerItemProxy */ = {
